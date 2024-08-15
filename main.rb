@@ -32,15 +32,20 @@ def start_game(game, player)
 end
 
 def load_game(game)
-  file = CSV.open("data.csv")
-  file.each do |row|
-    if row[0] == "word"
-      game.word = row[1].to_s
-    elsif row[0] == "player_word"
-      game.player_word = row[1].to_s
-    else
-      game.lifes = row[1].to_i
+  begin # rubocop:disable Style/RedundantBegin
+    file = CSV.open("data.csv")
+    file.each do |row|
+      if row[0] == "word"
+        game.word = row[1].to_s
+      elsif row[0] == "player_word"
+        game.player_word = row[1].to_s
+      else
+        game.lifes = row[1].to_i
+      end
     end
+  rescue StandardError
+    puts "There is no data to load, press enter to start a new game".colorize(:red)
+    gets
   end
 end
 

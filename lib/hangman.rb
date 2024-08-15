@@ -43,7 +43,7 @@ module Hangman
     end
 
     def check_winner
-      if @lifes == 0
+      if @lifes.zero?
         puts "#{'You loose'.colorize(:red)}. press Enter to back to menu"
         gets
       end
